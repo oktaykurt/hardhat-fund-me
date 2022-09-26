@@ -7,13 +7,13 @@ developmentChains.includes(network.name)
   : describe("FundMe Staging Tests", function() {
       let deployer;
       let fundMe;
-      const sendValue = ethers.utils.parseEther("0.001");
+      const sendValue = ethers.utils.parseEther("0.1");
       beforeEach(async () => {
         deployer = (await getNamedAccounts()).deployer;
         fundMe = await ethers.getContract("FundMe", deployer);
       });
 
-      it.only("Deployer can fund and withdraw", async function() {
+      it("allows people to fund and withdraw", async function() {
         const fundTxResponse = await fundMe.fund({ value: sendValue });
         await fundTxResponse.wait(1);
         const withdrawTxResponse = await fundMe.withdraw();
